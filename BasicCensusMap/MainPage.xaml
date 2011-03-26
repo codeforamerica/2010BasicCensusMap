@@ -24,7 +24,7 @@
                          Map="{Binding ElementName=MyMap}"  >
         </esri:Navigation>
 
-        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" >
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" >
             <Rectangle Fill="#77919191" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0" >
                 <Rectangle.Effect>
                     <DropShadowEffect/>
@@ -44,7 +44,7 @@
         </Grid>
 
 
-        <Grid HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10, 40,10,0" >
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10, 60,10,0" >
             <Rectangle Fill="#77919191" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0" >
                 <Rectangle.Effect>
                     <DropShadowEffect/>
@@ -151,7 +151,7 @@
         </Grid>
 
 
-        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,60,10,10" >
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,10,10,10" >
             <Rectangle Fill="#77919191" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0" >
                 <Rectangle.Effect>
                     <DropShadowEffect/>
