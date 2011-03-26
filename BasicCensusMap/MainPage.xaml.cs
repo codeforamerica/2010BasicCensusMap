@@ -19,10 +19,10 @@ namespace BasicCensusMap
         {
             InitializeComponent();
 
-            ESRI.ArcGIS.Client.Geometry.Envelope initialExtent =
-             new ESRI.ArcGIS.Client.Geometry.Envelope(-13205480.536, 4077189.785, -13176602.592, 4090421.641);
+            //ESRI.ArcGIS.Client.Geometry.Envelope initialExtent =
+            // new ESRI.ArcGIS.Client.Geometry.Envelope(-13205480.536, 4077189.785, -13176602.592, 4090421.641);
 
-            MyMap.Extent = initialExtent;
+            //MyMap.Extent = initialExtent;
         }
 
         private void RadioButton_Click(object sender, RoutedEventArgs e)
