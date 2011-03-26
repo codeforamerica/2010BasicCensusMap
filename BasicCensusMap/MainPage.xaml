@@ -171,7 +171,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="CandidatePanelGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,15" Visibility="Collapsed">
+        <Grid x:Name="CandidatePanelGrid" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,275,10" Visibility="Collapsed">
             <Rectangle Stroke="Gray"  RadiusX="10" RadiusY="10" Fill="#77919191" Margin="0,0,0,5" >
                 <Rectangle.Effect>
                     <DropShadowEffect/>
