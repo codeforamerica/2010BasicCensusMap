@@ -77,7 +77,7 @@ namespace BasicCensusMap
 
         private void LocatorTask_AddressToLocationsCompleted(object sender, ESRI.ArcGIS.Client.Tasks.AddressToLocationsEventArgs args)
         {
-            //_candidateGraphicsLayer.ClearGraphics();
+            _candidateGraphicsLayer.ClearGraphics();
             CandidateListBox.Items.Clear();
 
             List<AddressCandidate> returnedCandidates = args.Results;
@@ -146,7 +146,7 @@ namespace BasicCensusMap
             if (index >= 0)
             {
                 MapPoint candidatePoint = _candidateGraphicsLayer.Graphics[index].Geometry as MapPoint;
-                double displaySize = MyMap.MinimumResolution * 30;
+                double displaySize = MyMap.MinimumResolution * 30000;
 
                 ESRI.ArcGIS.Client.Geometry.Envelope displayExtent = new ESRI.ArcGIS.Client.Geometry.Envelope(
                     candidatePoint.X - (displaySize / 2),
