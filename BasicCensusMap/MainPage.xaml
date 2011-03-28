@@ -34,11 +34,11 @@
                 <RadioButton x:Name="StreetsRadioButton" 
                          Tag="http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer"
                          IsChecked="true" Margin="5,0,0,0" Foreground="White"
-                         GroupName="Layers" Content="Streets" Click="BaseMapRadioButton_Click"/>
+                         GroupName="Imagery" Content="Streets" Click="BaseMapRadioButton_Click"/>
                 <RadioButton x:Name="ImageryRadioButton" 
                          Tag="http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer" 
                          Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Imagery" Click="BaseMapRadioButton_Click"/>
+                         GroupName="Imagery" Content="Imagery" Click="BaseMapRadioButton_Click"/>
             </StackPanel>
 
         </Grid>
@@ -160,11 +160,11 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
                 <TextBlock Text="Enter Address Information" FontWeight="Bold" HorizontalAlignment="Center" Foreground="White" />
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                    <TextBlock Text="City: " Width="80" TextAlignment="Right" />
+                    <TextBlock Text="City: " Width="80" TextAlignment="Right" Foreground="White" />
                     <TextBox x:Name="City" Text="San Francisco" Width="125"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
-                    <TextBlock Text="State: " Width="80" TextAlignment="Right"/>
+                    <TextBlock Text="State: " Width="80" TextAlignment="Right" Foreground="White"/>
                     <TextBox x:Name="State" Text="CA" Width="125"/>
                 </StackPanel>
 
