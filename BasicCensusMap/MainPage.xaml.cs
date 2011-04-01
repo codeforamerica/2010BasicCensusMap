@@ -26,8 +26,8 @@ namespace BasicCensusMap
 
         private List<DataItem> _dataItems = null;
 
-
-
+        private ArcGISTiledMapServiceLayer arcgisLayer;
+         
         public MainPage()
         {
             InitializeComponent();
@@ -38,13 +38,15 @@ namespace BasicCensusMap
             //MyMap.Extent = initialExtent;
 
             _candidateGraphicsLayer = MyMap.Layers["CandidateGraphicsLayer"] as GraphicsLayer;
+            arcgisLayer = MyMap.Layers["CensusLayer"] as ArcGISTiledMapServiceLayer;
         }
 
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
             
+            //ArcGISTiledMapServiceLayer arcgisLayer = MyMap.Layers["CensusLayer"] as ArcGISTiledMapServiceLayer;
 
-            ArcGISTiledMapServiceLayer arcgisLayer = MyMap.Layers["CensusLayer"] as ArcGISTiledMapServiceLayer;
+           // arcgisLayer = MyMap.Layers["CensusLayer"] as ArcGISTiledMapServiceLayer;
             arcgisLayer.Url = ((RadioButton)sender).Tag as string;
             //arcgisLayer.Opacity = 0.5;
         }
@@ -181,7 +183,12 @@ namespace BasicCensusMap
                 SpatialReference = MyMap.SpatialReference
             };
 
-            IdentifyTask identifyTask = new IdentifyTask("http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Average_Household_Size/MapServer/");
+          
+
+            //IdentifyTask identifyTask = new IdentifyTask("http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Average_Household_Size/MapServer/");
+            IdentifyTask identifyTask = new IdentifyTask(arcgisLayer.Url);
+            
+            
             identifyTask.ExecuteCompleted += IdentifyTask_ExecuteCompleted;
             identifyTask.Failed += IdentifyTask_Failed;
             identifyTask.ExecuteAsync(identifyParams);
