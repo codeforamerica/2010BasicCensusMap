@@ -24,6 +24,9 @@ namespace BasicCensusMap
         private static ESRI.ArcGIS.Client.Projection.WebMercator _mercator =
           new ESRI.ArcGIS.Client.Projection.WebMercator();
 
+        private List<DataItem> _dataItems = null;
+
+
 
         public MainPage()
         {
@@ -164,46 +167,93 @@ namespace BasicCensusMap
             MessageBox.Show("Locator service failed: " + e.Error);
         }
 
-        private void MyMap_MouseClick(object sender, ESRI.ArcGIS.Client.Map.MouseEventArgs e)
+        private void QueryPoint_MouseClick(object sender, ESRI.ArcGIS.Client.Map.MouseEventArgs e)
         {
-            FeatureLayer featureLayer = MyMap.Layers["MyFeatureLayer"] as FeatureLayer;
-            System.Windows.Point screenPnt = MyMap.MapToScreen(e.MapPoint);
+            ESRI.ArcGIS.Client.Geometry.MapPoint clickPoint = e.MapPoint;
 
-            // Account for difference between Map and application origin
-            GeneralTransform generalTransform = MyMap.TransformToVisual(Application.Current.RootVisual);
-            System.Windows.Point transformScreenPnt = generalTransform.Transform(screenPnt);
-
-            IEnumerable<Graphic> selected =
-                featureLayer.FindGraphicsInHostCoordinates(transformScreenPnt);
-
-            foreach (Graphic g in selected)
+            ESRI.ArcGIS.Client.Tasks.IdentifyParameters identifyParams = new IdentifyParameters()
             {
-
-                MyInfoWindow.Anchor = e.MapPoint;
-                MyInfoWindow.IsOpen = true;
-                //Since a ContentTemplate is defined, Content will define the DataContext for the ContentTemplate
-                MyInfoWindow.Content = g.Attributes;
-                return;
-            }
-
-            InfoWindow window = new InfoWindow()
-            {
-                Anchor = e.MapPoint,
-                Map = MyMap,
-                IsOpen = true,
-                ContentTemplate = LayoutRoot.Resources["LocationInfoWindowTemplate"] as System.Windows.DataTemplate,
-                //Since a ContentTemplate is defined, Content will define the DataContext for the ContentTemplate
-                Content = e.MapPoint
+                Geometry = clickPoint,
+                MapExtent = MyMap.Extent,
+                Width = (int)MyMap.ActualWidth,
+                Height = (int)MyMap.ActualHeight,
+                LayerOption = LayerOption.visible,
+                SpatialReference = MyMap.SpatialReference
             };
-            LayoutRoot.Children.Add(window);
-        }
-        
 
-        private void MyInfoWindow_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+            IdentifyTask identifyTask = new IdentifyTask("http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Average_Household_Size/MapServer/");
+            identifyTask.ExecuteCompleted += IdentifyTask_ExecuteCompleted;
+            identifyTask.Failed += IdentifyTask_Failed;
+            identifyTask.ExecuteAsync(identifyParams);
+
+            GraphicsLayer graphicsLayer = MyMap.Layers["MyGraphicsLayer"] as GraphicsLayer;
+            graphicsLayer.ClearGraphics();
+            ESRI.ArcGIS.Client.Graphic graphic = new ESRI.ArcGIS.Client.Graphic()
+            {
+                Geometry = clickPoint,
+                Symbol = LayoutRoot.Resources["DefaultPictureSymbol"] as ESRI.ArcGIS.Client.Symbols.Symbol
+            };
+            graphicsLayer.Graphics.Add(graphic);
+        }
+
+        public void ShowFeatures(List<IdentifyResult> results)
         {
-            MyInfoWindow.IsOpen = false;
+            _dataItems = new List<DataItem>();
+
+            if (results != null && results.Count > 0)
+            {
+                IdentifyComboBox.Items.Clear();
+                foreach (IdentifyResult result in results)
+                {
+                    Graphic feature = result.Feature;
+                    string title = result.Value.ToString() + " (" + result.LayerName + ")";
+                    _dataItems.Add(new DataItem()
+                    {
+                        Title = title,
+                        Data = feature.Attributes
+                    });
+                    IdentifyComboBox.Items.Add(title);
+                }
+                IdentifyComboBox.SelectedIndex = 0;
+            }
         }
 
+        void cb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = IdentifyComboBox.SelectedIndex;
+            if (index > -1)
+                IdentifyDetailsDataGrid.ItemsSource = _dataItems[index].Data;
+        }
+
+        private void IdentifyTask_ExecuteCompleted(object sender, IdentifyEventArgs args)
+        {
+            IdentifyDetailsDataGrid.ItemsSource = null;
+
+            if (args.IdentifyResults != null && args.IdentifyResults.Count > 0)
+            {
+                IdentifyResultsPanel.Visibility = Visibility.Visible;
+
+                ShowFeatures(args.IdentifyResults);
+            }
+            else
+            {
+                IdentifyComboBox.Items.Clear();
+                IdentifyComboBox.UpdateLayout();
+
+                IdentifyResultsPanel.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        public class DataItem
+        {
+            public string Title { get; set; }
+            public IDictionary<string, object> Data { get; set; }
+        }
+
+        void IdentifyTask_Failed(object sender, TaskFailedEventArgs e)
+        {
+            MessageBox.Show("Identify failed. Error: " + e.Error);
+        }
 
 
     }
