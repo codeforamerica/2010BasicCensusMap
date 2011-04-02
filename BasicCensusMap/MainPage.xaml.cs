@@ -13,7 +13,7 @@ using ESRI.ArcGIS.Client;
 using ESRI.ArcGIS.Client.Toolkit;
 using ESRI.ArcGIS.Client.Geometry;
 using ESRI.ArcGIS.Client.Tasks;
-
+using System.Json;
 
 namespace BasicCensusMap
 {
@@ -39,17 +39,16 @@ namespace BasicCensusMap
 
             _candidateGraphicsLayer = MyMap.Layers["CandidateGraphicsLayer"] as GraphicsLayer;
             arcgisLayer = MyMap.Layers["CensusLayer"] as ArcGISTiledMapServiceLayer;
+
+            LoadComboBoxData();
+           
+
+           
+
+
         }
 
-        private void RadioButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            //ArcGISTiledMapServiceLayer arcgisLayer = MyMap.Layers["CensusLayer"] as ArcGISTiledMapServiceLayer;
-
-           // arcgisLayer = MyMap.Layers["CensusLayer"] as ArcGISTiledMapServiceLayer;
-            arcgisLayer.Url = ((RadioButton)sender).Tag as string;
-            //arcgisLayer.Opacity = 0.5;
-        }
+      
 
         private void BaseMapRadioButton_Click(object sender, RoutedEventArgs e)
         {
@@ -260,6 +259,82 @@ namespace BasicCensusMap
         void IdentifyTask_Failed(object sender, TaskFailedEventArgs e)
         {
             MessageBox.Show("Identify failed. Error: " + e.Error);
+        }
+
+        //Combobox layer code
+        
+        private void LoadComboBoxData()
+        {
+            //Uri serviceUri = new Uri("http://server.arcgisonline.com/ArcGIS/rest/services/Demographics?f=json", UriKind.Absolute);
+            //WebClient downloader = new WebClient();
+            //downloader.OpenReadCompleted += new OpenReadCompletedEventHandler(downloader_OpenReadCompleted);
+            //downloader.OpenReadAsync(serviceUri);
+
+            string[] strArray = {
+            "Average_Household_Size",
+            "Daytime_Population",
+            "Diversity_Index",
+            "Labor_Force_Participation_Rate", 
+            "Median_Home_Value",
+            "Median_Household_Income",
+            "Median_Net_Worth",
+            "Owner_Occupied_Housing",
+            "Percent_Male",
+            "Percent_Over_64",
+            "Percent_Under_18",
+            "Population_by_Sex",
+            "Population_Density",
+            "Projected_Population_Change",
+            "Recent_Population_Change",
+            "Retail_Spending_Potential",
+            "Tapestry",
+            "Unemployment_Rate" };
+           
+            
+              ComboBoxLayer.ItemsSource = strArray;
+
+
+        }
+
+        void cbLayer_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+          
+            //http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Population_Density/MapServer
+
+            string BaseUri = "http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_";
+            string currentLayer = (string)ComboBoxLayer.SelectedValue;
+
+
+            arcgisLayer.Url = BaseUri + currentLayer + "/MapServer";
+          
+        }
+
+
+        void downloader_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
+        {
+           
+            //JsonArray jsonArray = (JsonArray)JsonArray.Load(e.Result);
+
+
+            //JsonObject jsonArray = (JsonObject)JsonObject.Load(e.Result);
+
+            //var query = from layer in jsonArray
+            //            select new CensusLayer
+            //            {
+            //                //LayerName = (string)layer["name"],
+            //                //MapType = (string)layer["type"]
+
+            //            };
+
+
+            //List<CensusLayer> layers = query.ToList() as List<CensusLayer>;
+
+            //ComboBox1.ItemsSource = layers;
+
+         
+
+
+          
         }
 
 

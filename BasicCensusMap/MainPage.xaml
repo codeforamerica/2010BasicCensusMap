@@ -49,96 +49,20 @@
         </Grid>
 
 
-        <Grid HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10, 60,10,0" >
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,60,10,0" >
             <Rectangle Fill="#77919191" Stroke="Gray"  RadiusX="10" RadiusY="10" Margin="0" >
                 <Rectangle.Effect>
                     <DropShadowEffect/>
                 </Rectangle.Effect>
             </Rectangle>
+            <TextBlock Text="Select Census Layer" FontWeight="Bold" HorizontalAlignment="Center" Foreground="White" />
             <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Background="Transparent" Margin="10">
-                <RadioButton x:Name="AvgHouseHOldRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Average_Household_Size/MapServer"
-                         IsChecked="true" Margin="5,0,0,0" Foreground="White"
-                         GroupName="Layers" Content="Average Household SIze" Click="RadioButton_Click"/>
-                <RadioButton x:Name="DaytimePopRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Daytime_Population/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Daytime Population" Click="RadioButton_Click"/>
-                <RadioButton x:Name="DiversityRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Diversity_Index/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Diversity Index" Click="RadioButton_Click"/>
-                <RadioButton x:Name="ParicipRateRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Labor_Force_Participation_Rate/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Labor Force Paricipation" Click="RadioButton_Click"/>
-                <RadioButton x:Name="MedianAgeRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Median_Age/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Median Age" Click="RadioButton_Click"/>
-                <RadioButton x:Name="MedianHomeValueRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Median_Home_Value/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Median Home Value" Click="RadioButton_Click"/>
-                <RadioButton x:Name="MedianHouseIncomeValueRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Median_Household_Income/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Median Househould Income" Click="RadioButton_Click"/>
-                <RadioButton x:Name="MedianNetWorthRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Median_Net_Worth/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Median Net Worth" Click="RadioButton_Click"/>
-                <RadioButton x:Name="OwnerOccupiedRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Owner_Occupied_Housing/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Owner Occupied Housing" Click="RadioButton_Click"/>
-                <RadioButton x:Name="PercentMaleRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Percent_Male/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Percent Male" Click="RadioButton_Click"/>
-                <RadioButton x:Name="PercentOverRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Percent_Over_64/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Percent Over 64" Click="RadioButton_Click"/>
-                <RadioButton x:Name="PercentUnderRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Percent_Under_18/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Percent Under 18" Click="RadioButton_Click"/>
-                <RadioButton x:Name="PopBySexRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Population_by_Sex/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Population by Sex" Click="RadioButton_Click"/>
-                <RadioButton x:Name="PopDensityRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Population_Density/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Population by Density" Click="RadioButton_Click"/>
-                <RadioButton x:Name="PopProjPopRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Projected_Population_Change/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Projected Population Change" Click="RadioButton_Click"/>
-                <RadioButton x:Name="RecentPopRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Recent_Population_Change/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Recent Population Change" Click="RadioButton_Click"/>
-                <RadioButton x:Name="RetailPopRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Retail_Spending_Potential/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Retail Spending Potential" Click="RadioButton_Click"/>
-                <RadioButton x:Name="TapestryRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Tapestry/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Tapestry" Click="RadioButton_Click"/>
-                <RadioButton x:Name="UnemploymentRadioButton" 
-                         Tag="http://server.arcgisonline.com/ArcGIS/rest/services/Demographics/USA_Unemployment_Rate/MapServer" 
-                         Margin="5,0,0,0" Foreground="White" 
-                         GroupName="Layers" Content="Unemployment Rate" Click="RadioButton_Click"/>
-                <ToolTipService.ToolTip>
-                    <StackPanel MaxWidth="400">
-                        <TextBlock FontWeight="Bold" Text="{Binding CopyrightText}" TextWrapping="Wrap" />
-                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
-                    </StackPanel>
-                </ToolTipService.ToolTip>
-
+                <ComboBox x:Name="ComboBoxLayer" Width="250" Height="25" SelectionChanged="cbLayer_SelectionChanged"
+                  VerticalAlignment="Top" HorizontalAlignment="Left"  
+                  Margin="0,10,0,0">
+                    
+                </ComboBox>
+             
 
             </StackPanel>
 
@@ -238,6 +162,10 @@
                 </Grid>
             </Grid>
         </Border>
+
+      
+
+
 
     </Grid>
 </UserControl>
