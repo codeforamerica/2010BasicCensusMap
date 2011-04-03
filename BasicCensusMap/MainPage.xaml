@@ -11,7 +11,8 @@
     <Grid x:Name="LayoutRoot" Background="White">
         <Grid.Resources>
            <esri:PictureMarkerSymbol x:Key="DefaultMarkerSymbol" OffsetX="0" OffsetY="31" Source="http://help.arcgis.com/en/webapi/silverlight/samples/Assets/images/flag-yellow-32x32.png" />
-        </Grid.Resources>
+            <esri:SimpleFillSymbol x:Key="DefaultFillSymbol" Fill="#500000FF" BorderBrush="Blue" BorderThickness="1" />
+      </Grid.Resources>
 
 
         <esri:Map x:Name="MyMap" Background="white" Extent="-15000000,2000000,-7000000,8000000" MouseClick="QueryPoint_MouseClick" >

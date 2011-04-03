@@ -235,11 +235,15 @@ namespace BasicCensusMap
         {
             IdentifyDetailsDataGrid.ItemsSource = null;
 
+  
             if (args.IdentifyResults != null && args.IdentifyResults.Count > 0)
             {
+
+
                 IdentifyResultsPanel.Visibility = Visibility.Visible;
 
                 ShowFeatures(args.IdentifyResults);
+
             }
             else
             {
@@ -292,6 +296,7 @@ namespace BasicCensusMap
            
             
               ComboBoxLayer.ItemsSource = strArray;
+           
 
 
         }
